@@ -1,0 +1,76 @@
+[
+    {
+        "dataset_id": "5fdb3991-7bf9-44a4-bdf8-2b7ea7840b07",
+        "dataset_name": "customer",
+        "dataset_type": "hyper",
+        "certified": false,
+        "certification_note": null,
+        "dataset_tags": [],
+        "published on": "customer",
+        "dataset project": "Default",
+        "dataset_connection_type": "hyper",
+        "connection_id": "0c58eb33-87d1-4538-87ac-a373ca9424b0",
+        "connection_address": "",
+        "connection_username": "tableau_internal_user",
+        "first_created": "2020-11-20 11:07:57+00:00",
+        "last_updated": "2020-11-20 13:38:16+00:00",
+        "dataset_fields": [
+            {
+                "field_id": "[Number of Records]",
+                "field_name": "[Number of Records]",
+                "field_datatype": "integer",
+                "field_default_aggregation": null,
+                "field_calculation": "1",
+                "field_description": null
+            },
+            {
+                "field_id": "[Customer ID]",
+                "field_name": "Customer ID",
+                "field_datatype": "string",
+                "field_default_aggregation": "Count",
+                "field_calculation": null,
+                "field_description": null
+            },
+            {
+                "field_id": "[Customer Name]",
+                "field_name": "Customer Name",
+                "field_datatype": "string",
+                "field_default_aggregation": "Count",
+                "field_calculation": null,
+                "field_description": null
+            },
+            {
+                "field_id": "[Loyalty Reward Points]",
+                "field_name": "Loyalty Reward Points",
+                "field_datatype": "string",
+                "field_default_aggregation": "Count",
+                "field_calculation": null,
+                "field_description": null
+            },
+            {
+                "field_id": "[Segment]",
+                "field_name": "Segment",
+                "field_datatype": "string",
+                "field_default_aggregation": "Count",
+                "field_calculation": null,
+                "field_description": null
+            },
+            {
+                "field_id": "[Category]",
+                "field_name": "Category",
+                "field_datatype": "string",
+                "field_default_aggregation": "Count",
+                "field_calculation": null,
+                "field_description": null
+            },
+            {
+                "field_id": "[Role]",
+                "field_name": "Role",
+                "field_datatype": "string",
+                "field_default_aggregation": "Count",
+                "field_calculation": null,
+                "field_description": null
+            }
+        ]
+    }
+]

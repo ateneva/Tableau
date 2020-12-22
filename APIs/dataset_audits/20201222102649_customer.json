@@ -1,0 +1,58 @@
+[
+  {
+    "field_id": "[Number of Records]",
+    "field_name": "[Number of Records]",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "1",
+    "field_description": null
+  },
+  {
+    "field_id": "[Customer ID]",
+    "field_name": "Customer ID",
+    "field_datatype": "string",
+    "field_default_aggregationn": "Count",
+    "field_calculation": null,
+    "field_description": null
+  },
+  {
+    "field_id": "[Customer Name]",
+    "field_name": "Customer Name",
+    "field_datatype": "string",
+    "field_default_aggregationn": "Count",
+    "field_calculation": null,
+    "field_description": null
+  },
+  {
+    "field_id": "[Loyalty Reward Points]",
+    "field_name": "Loyalty Reward Points",
+    "field_datatype": "string",
+    "field_default_aggregationn": "Count",
+    "field_calculation": null,
+    "field_description": null
+  },
+  {
+    "field_id": "[Segment]",
+    "field_name": "Segment",
+    "field_datatype": "string",
+    "field_default_aggregationn": "Count",
+    "field_calculation": null,
+    "field_description": null
+  },
+  {
+    "field_id": "[Category]",
+    "field_name": "Category",
+    "field_datatype": "string",
+    "field_default_aggregationn": "Count",
+    "field_calculation": null,
+    "field_description": null
+  },
+  {
+    "field_id": "[Role]",
+    "field_name": "Role",
+    "field_datatype": "string",
+    "field_default_aggregationn": "Count",
+    "field_calculation": null,
+    "field_description": null
+  }
+]

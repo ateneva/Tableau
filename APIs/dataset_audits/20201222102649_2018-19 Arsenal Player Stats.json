@@ -1,0 +1,314 @@
+[
+  {
+    "field_id": "Rank",
+    "field_name": "Rank",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": null,
+    "field_description": null
+  },
+  {
+    "field_id": "Player",
+    "field_name": "Player",
+    "field_datatype": "string",
+    "field_default_aggregationn": null,
+    "field_calculation": null,
+    "field_description": null
+  },
+  {
+    "field_id": "Nationality",
+    "field_name": "Nationality",
+    "field_datatype": "string",
+    "field_default_aggregationn": null,
+    "field_calculation": null,
+    "field_description": null
+  },
+  {
+    "field_id": "Metric",
+    "field_name": "Metric",
+    "field_datatype": "string",
+    "field_default_aggregationn": null,
+    "field_calculation": null,
+    "field_description": null
+  },
+  {
+    "field_id": "Stat",
+    "field_name": "Stat",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": null,
+    "field_description": null
+  },
+  {
+    "field_id": "[# appearances (copy 2)]",
+    "field_name": "# clearances offline",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If [Metric] = 'Clearances Off Line' then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# appearances (copy)]",
+    "field_name": "# assists",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If [Metric] = 'Assists' then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# assists (copy)]",
+    "field_name": "# big chances missed",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Big') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# big chances missed (copy)]",
+    "field_name": "# dispossessed",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Dispossessed') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# clearances offline (copy)]",
+    "field_name": "# clearances",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If [Metric] = 'Clearances' then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# dispossessed (copy 2)]",
+    "field_name": "# high claim",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'High Claim') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# dispossessed (copy)]",
+    "field_name": "# fouls",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Fouls') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# fouls (copy)]",
+    "field_name": "# goals",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Goals') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# goals (copy 2)]",
+    "field_name": "# own goals",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Own Goal') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# goals (copy)]",
+    "field_name": "# minutes played",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Minutes') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# high claim (copy)]",
+    "field_name": "# hit woodwork",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Woodwork') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# minutes played (copy)]",
+    "field_name": "# offsides",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Offsides') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# offsides (copy)]",
+    "field_name": "# passes",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Passes') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# passes (copy 2)]",
+    "field_name": "# punches",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Punches') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# passes (copy)]",
+    "field_name": "# shots",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Shots') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# punches (copy)]",
+    "field_name": "# red cards",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Red Cards') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# red cards (copy)]",
+    "field_name": "# yellow cards",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Yellow Cards') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# shots (copy 2)]",
+    "field_name": "# saves",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Saves') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# shots (copy)]",
+    "field_name": "# tackles",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Tackles') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[# tackles (copy)]",
+    "field_name": "# touches",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If contains([Metric], 'Touches') then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[Calculation_706220730794393600]",
+    "field_name": "Chosen Stat 1",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If [Parameters].[Metric Parameter] = 'Appearances' then [Stat (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'Assists' then [# appearances (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'Big Chances Missed' then [# assists (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'Clearances' then [# clearances offline (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'Clearances Off Line' then [# appearances (copy 2)]\r\n    elseif [Parameters].[Metric Parameter] = 'Dispossessed' then [# big chances missed (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'Fouls' then [# dispossessed (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'Goals' then [# fouls (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'High Claim' then [# dispossessed (copy 2)]\r\n    elseif [Parameters].[Metric Parameter] = 'Hit Woodwork' then [# high claim (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'Minutes Played' then [# goals (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'Offsides' then [# minutes played (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'Own Goal' then [# goals (copy 2)]\r\n    elseif [Parameters].[Metric Parameter] = 'Passes' then [# offsides (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'Punches' then [# passes (copy 2)]\r\n    elseif [Parameters].[Metric Parameter] = 'Red Cards' then [# punches (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'Saves' then [# shots (copy 2)]\r\n    elseif [Parameters].[Metric Parameter] = 'Shots' then [# passes (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'Tackles' then [# shots (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'Touches' then [# tackles (copy)]\r\n    elseif [Parameters].[Metric Parameter] = 'Yellow Cards' then [# red cards (copy)]\r\n\r\nend",
+    "field_description": null
+  },
+  {
+    "field_id": "[Chosen Stat 1 (copy)]",
+    "field_name": "Chosen Stat 2",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If [Parameters].[Choose Stat 1 (copy)] = 'Appearances' then [Stat (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Assists' then [# appearances (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Big Chances Missed' then [# assists (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Clearances' then [# clearances offline (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Clearances Off Line' then [# appearances (copy 2)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Dispossessed' then [# big chances missed (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Fouls' then [# dispossessed (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Goals' then [# fouls (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'High Claim' then [# dispossessed (copy 2)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Hit Woodwork' then [# high claim (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Minutes Played' then [# goals (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Offsides' then [# minutes played (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Own Goal' then [# goals (copy 2)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Passes' then [# offsides (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Punches' then [# passes (copy 2)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Red Cards' then [# punches (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Saves' then [# shots (copy 2)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Shots' then [# passes (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Tackles' then [# shots (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Touches' then [# tackles (copy)]\r\n    elseif [Parameters].[Choose Stat 1 (copy)] = 'Yellow Cards' then [# red cards (copy)]\r\n\r\nend",
+    "field_description": null
+  },
+  {
+    "field_id": "[Chosen Stat 2 (copy)]",
+    "field_name": "Chosen Stat 3",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If [Parameters].[Choose Stat 2 (copy)] = 'Appearances' then [Stat (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Assists' then [# appearances (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Big Chances Missed' then [# assists (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Clearances' then [# clearances offline (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Clearances Off Line' then [# appearances (copy 2)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Dispossessed' then [# big chances missed (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Fouls' then [# dispossessed (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Goals' then [# fouls (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'High Claim' then [# dispossessed (copy 2)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Hit Woodwork' then [# high claim (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Minutes Played' then [# goals (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Offsides' then [# minutes played (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Own Goal' then [# goals (copy 2)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Passes' then [# offsides (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Punches' then [# passes (copy 2)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Red Cards' then [# punches (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Saves' then [# shots (copy 2)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Shots' then [# passes (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Tackles' then [# shots (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Touches' then [# tackles (copy)]\r\n    elseif [Parameters].[Choose Stat 2 (copy)] = 'Yellow Cards' then [# red cards (copy)]\r\n\r\nend",
+    "field_description": null
+  },
+  {
+    "field_id": "[Nationality]",
+    "field_name": "[Nationality]",
+    "field_datatype": "string",
+    "field_default_aggregationn": "Count",
+    "field_calculation": null,
+    "field_description": null
+  },
+  {
+    "field_id": "[Number of Records]",
+    "field_name": "[Number of Records]",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "1",
+    "field_description": null
+  },
+  {
+    "field_id": "[Player - Split 1]",
+    "field_name": "Initials",
+    "field_datatype": "string",
+    "field_default_aggregationn": null,
+    "field_calculation": "LEFT(TRIM( SPLIT( [Player], \" \", 1 ) ),1) \r\n+ LEFT(TRIM( SPLIT( [Player], \" \", 2 ) ),1)",
+    "field_description": null
+  },
+  {
+    "field_id": "[Player]",
+    "field_name": "[Player]",
+    "field_datatype": "string",
+    "field_default_aggregationn": "Count",
+    "field_calculation": null,
+    "field_description": null
+  },
+  {
+    "field_id": "[Rank]",
+    "field_name": "[Rank]",
+    "field_datatype": "integer",
+    "field_default_aggregationn": "Sum",
+    "field_calculation": null,
+    "field_description": null
+  },
+  {
+    "field_id": "[Stat (copy)]",
+    "field_name": "# appearances",
+    "field_datatype": "integer",
+    "field_default_aggregationn": null,
+    "field_calculation": "If [Metric] = 'Appearances' then [Stat] else 0 end",
+    "field_description": null
+  },
+  {
+    "field_id": "[Choose Stat 1 (copy)]",
+    "field_name": "# fouls",
+    "field_datatype": "string",
+    "field_default_aggregationn": null,
+    "field_calculation": "\"Fouls\"",
+    "field_description": null
+  },
+  {
+    "field_id": "[Choose Stat 2 (copy)]",
+    "field_name": "# goals",
+    "field_datatype": "string",
+    "field_default_aggregationn": null,
+    "field_calculation": "\"Goals\"",
+    "field_description": null
+  },
+  {
+    "field_id": "[Metric Parameter]",
+    "field_name": "# appearances",
+    "field_datatype": "string",
+    "field_default_aggregationn": null,
+    "field_calculation": "\"Appearances\"",
+    "field_description": null
+  },
+  {
+    "field_id": "[Metric]",
+    "field_name": "Metric",
+    "field_datatype": "string",
+    "field_default_aggregationn": "Count",
+    "field_calculation": null,
+    "field_description": null
+  },
+  {
+    "field_id": "[Stat]",
+    "field_name": "Stat",
+    "field_datatype": "integer",
+    "field_default_aggregationn": "Sum",
+    "field_calculation": null,
+    "field_description": null
+  }
+]
