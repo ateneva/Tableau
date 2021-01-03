@@ -36,6 +36,9 @@ SELECT
   s.url_namespace             as url_namespace,
   s.status                    as status
 
- FROM public.job job
- INNER JOIN public.s s
-  	ON (job.site_id = s.id)
+FROM public.background_jobs job
+INNER JOIN public.sites s
+    ON (job.site_id = s.id)
+
+WHERE job.job_name LIKE 'Refresh%'
+    OR job.job_name LIKE 'Subscription%'
