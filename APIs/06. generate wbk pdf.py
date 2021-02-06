@@ -6,6 +6,7 @@ from PyPDF2 import PdfFileMerger, PdfFileReader
 generate_pdf = ['Tableau Onboarding', 'VizAlertsDemo']
 
 def download_as_pdf(tableau_server, tableau_user, user_password, site_name, download_path):
+    # if you're connecting to the default site, pass empty string in site_name
 
     now = dt.datetime.today().strftime('%Y-%m-%d %H-%M-%S')
     today = dt.datetime.today().strftime('%Y-%m-%d')

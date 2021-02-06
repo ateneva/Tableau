@@ -3,6 +3,7 @@ import tableauserverclient as TSC
 from pathlib import Path
 
 def publish_multiple_datasources(tableau_server, tableau_user, user_password, site_name, project_name, local_folder):
+    # if you're connecting to the default site, pass empty string in site_name
 
     # authenticate with the correct site
     tableau_auth = TSC.TableauAuth(tableau_user, user_password, site_id=site_name)
