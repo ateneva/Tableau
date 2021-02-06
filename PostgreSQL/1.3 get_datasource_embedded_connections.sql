@@ -1,21 +1,21 @@
 SELECT
-ds.project_id          	as ProjectID,
-prj.name               	as ProjectName,
-ds.id                  	as DatasourceID,
-ds.name                	as DatasourceName,
-ds.parent_workbook_id  	as WorkbookID,
-w.name                 	as WorkbookName,
-sysus.name             	as DataSourceOwner,
+ds.project_id          	as project_id,
+prj.name               	as project_name,
+ds.id                  	as datasource_id,
+ds.name                	as datasource_name,
+ds.repository_url,
+ds.parent_workbook_id  	as workbook_id,
+w.name                 	as workbook_name,
+sysus.name             	as datasource_owner,
 w.refreshable_extracts 	as refreshable_extracts,
 w.extracts_refreshed_at,
-w.last_published_at    	as wbk_published_on,
-dc.server,
-dc.dbclass,
-dc.dbname,
-ds.last_published_at,
-dc.username,
-dc.password,
-dc.owner_type       	as ConnectionType
+w.last_published_at     as wbk_last_published,
+dc.dbclass              as embedded_connection_type,
+dc.dbname               as embedded_connection_name,
+ds.last_published_at    as connection_last_published,
+dc.username             as credentials_used,
+dc.password             as embedded_password,
+dc.owner_type           as connection_type
 
 FROM public.datasources ds
 INNER JOIN public.data_connections dc
@@ -34,7 +34,8 @@ INNER JOIN public.system_users sysus
 	ON  sysus.id = us.system_user_id
 
 WHERE dc.owner_type = 'Workbook'
-	--and dc.dbclass = 'sqlserver'
+	AND ds.repository_url LIKE '%embedded%'
+	AND dc.dbclass != 'sqlproxy'
 
 ORDER BY
 ds.project_id,
