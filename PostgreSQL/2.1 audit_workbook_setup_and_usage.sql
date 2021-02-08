@@ -17,15 +17,15 @@ WITH WORKBOOK_SETUP AS (
     wb.display_tabs             as wbk_display_tabs,
     wb.published_all_sheets     as wbk_published_all_sheets,
 
-    wb.data_engine_extracts		as wbk_connects_to_hyper_extracts,
-    wb.refreshable_extracts		as wbk_full_refresh_set,
-    wb.extracts_refreshed_at	as wbk_last_fully_refreshed_at,
-    wb.incrementable_extracts	as wbk_incremental_refresh_set,
-    wb.extracts_incremented_at	as wbk_last_refreshed_incrementally_at,
+    wb.data_engine_extracts     as wbk_connects_to_hyper_extracts,
+    wb.refreshable_extracts     as wbk_full_refresh_set,
+    wb.extracts_refreshed_at    as wbk_last_fully_refreshed_at,
+    wb.incrementable_extracts   as wbk_incremental_refresh_set,
+    wb.extracts_incremented_at  as wbk_last_refreshed_incrementally_at,
 
-    wb.last_published_at		as wbk_last_published_at,
-    wb.modified_by_user_id		as wbk_last_modified_by,
-    wb.revision					as wbk_revision,
+    wb.last_published_at        as wbk_last_published_at,
+    wb.modified_by_user_id      as wbk_last_modified_by,
+    wb.revision                 as wbk_revision,
     wb.document_version,
     wb.content_version
 
