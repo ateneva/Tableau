@@ -7,8 +7,12 @@ from glob import glob
 now = dt.datetime.today().strftime('%Y%m%d%H%M%S')
 print(now)
 
-def audit_local_datasets(local_folder):
-    under_review = ['customer', '2018-19 Arsenal Player Stats']
+def audit_local_datasets(local_folder, *args):
+    # pass the directory and the datasource names to audit
+    under_review = []
+    for a in args:
+        under_review.append(a)
+
     download_path = local_folder
     datasource_extension = ''
 
@@ -46,4 +50,4 @@ def audit_local_datasets(local_folder):
         print(f'Check {audit_file} for further details...:\n')
 
 if __name__ == '__main__':
-    audit_local_datasets('C:/Users/angelinat/Desktop/')
+    audit_local_datasets('C:/Users/angelinat/Desktop/', 'customer', '2018-19 Arsenal Player Stats')

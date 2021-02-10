@@ -5,7 +5,7 @@ import datetime as dt
 now = dt.datetime.today().strftime('%Y%m%d%H%M%S')
 print(now)
 
-def audit_groups(tableau_server, tableau_user, user_password, site_name, local_folder):
+def audit_groups(tableau_server, tableau_user, user_password, site_name, local_folder, *args):
     # if you're connecting to the default site, pass empty string in site_name
 
     tableau_auth = TSC.TableauAuth(tableau_user, user_password, site_id=site_name)
@@ -21,7 +21,9 @@ def audit_groups(tableau_server, tableau_user, user_password, site_name, local_f
             groups_ls = []
 
             for group in all_groups:
-                my_groups = ['Marketing', 'Management', 'Sales', 'Finance']
+                my_groups = []
+                for a in args:
+                    my_groups.append(a)
 
                 if group.name in my_groups:
                     pub_group = server.groups.populate_users(group)

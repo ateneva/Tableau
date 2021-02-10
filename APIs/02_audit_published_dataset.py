@@ -8,15 +8,19 @@ import datetime as dt
 now = dt.datetime.today().strftime('%Y%m%d%H%M%S')
 print(now)
 
-def audit_published_datasets(tableau_server, tableau_user, user_password, site_name, local_folder):
+def audit_published_datasets(tableau_server, tableau_user, user_password, site_name, local_folder, *args):
     # if you're connecting to the default site, pass empty string in site_name
+    # after site name, pass the datasource names as they appear on the server
 
     # user needs to have permissions to download datasources
     tableau_auth = TSC.TableauAuth(tableau_user, user_password, site_id=site_name)
     server = TSC.Server(tableau_server, use_server_version=True)
     server.auth.sign_in(tableau_auth)
 
-    under_review = ['customer', '2018-19 Arsenal Player Stats']
+    under_review = []
+    for a in args:
+        under_review.append(a)
+
     download_path = local_folder    # 'C:/Users/angelinat/Desktop/'
 
     for trigger in under_review:

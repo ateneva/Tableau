@@ -1,14 +1,18 @@
 
 import tableauserverclient as TSC
 
-def refresh_published_datasources(tableau_server, tableau_user, user_password, site_name):
+def refresh_published_datasources(tableau_server, tableau_user, user_password, site_name, *args):
     # if you're connecting to the default site, pass empty string in site_name
+    # after site name, pass the datasource names as they appear on the server
 
     tableau_auth = TSC.TableauAuth(tableau_user, user_password, site_id=site_name)
     server = TSC.Server(tableau_server, use_server_version=True)
     server.auth.sign_in(tableau_auth)
 
-    refreshes = ['published datasource name(s) as defined on server']
+    refreshes = []
+    for a in args:
+        refreshes.append(a)
+
     for trigger in refreshes:
         # pagination item can only list the first 100, therefore use request options to filter for the specific dataset
         req_option = TSC.RequestOptions()
