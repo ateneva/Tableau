@@ -33,7 +33,6 @@ def download_wbks_from_owner(tableau_server, tableau_user, user_password, site_n
 
 
 def download_wbks_from_project(tableau_server, tableau_user, user_password, site_name, download_path, project):
-
     # authenticate with Tableau Server
     tableau_auth = TSC.TableauAuth(tableau_user, user_password, site_id=site_name)
     server = TSC.Server(tableau_server, use_server_version=True)
@@ -50,7 +49,6 @@ def download_wbks_from_project(tableau_server, tableau_user, user_password, site
 
 
 def download_wbks_connected_to(tableau_server, tableau_user, user_password, site_name, download_path, datasource):
-
     # authenticate with Tableau Server
     tableau_auth = TSC.TableauAuth(tableau_user, user_password, site_id=site_name)
     server = TSC.Server(tableau_server, use_server_version=True)
