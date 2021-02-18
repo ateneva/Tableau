@@ -30,3 +30,21 @@ def download_wbks_from_owner(tableau_server, tableau_user, user_password, site_n
                 for wbk_name, wbk_id in wbks_to_download.items():
                     server.workbooks.download(wbk_id, filepath=download_path)
                     print(f'Downloaded {wbk_name}')
+
+
+def download_wbks_from_project(tableau_server, tableau_user, user_password, site_name, download_path, project):
+
+    # authenticate with Tableau Server
+    tableau_auth = TSC.TableauAuth(tableau_user, user_password, site_id=site_name)
+    server = TSC.Server(tableau_server, use_server_version=True)
+
+    with server.auth.sign_in(tableau_auth):
+
+        # page through all the workbooks on the Server and keep the relevant ones
+        wbks_to_review = {wbk.name: wbk.id for wbk in TSC.Pager(server.workbooks) if wbk.project_name == project}
+        print(f"{[k for k in wbks_to_review.keys()]}")  # print wbk names being downloaded
+
+        # download the workbooks
+        for wbk_name, wbk_id in wbks_to_review.items():
+            server.workbooks.download(wbk_id, filepath=download_path)
+            print(f'Downloaded {wbk_name}')
