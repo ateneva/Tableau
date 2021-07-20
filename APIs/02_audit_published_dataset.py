@@ -8,6 +8,7 @@ import datetime as dt
 now = dt.datetime.today().strftime('%Y%m%d%H%M%S')
 print(now)
 
+
 def audit_published_datasets(tableau_server, tableau_user, user_password, site_name, local_folder, *args):
     # if you're connecting to the default site, pass empty string in site_name
     # after site name, pass the datasource names as they appear on the server
@@ -15,7 +16,6 @@ def audit_published_datasets(tableau_server, tableau_user, user_password, site_n
     # user needs to have permissions to download datasources
     tableau_auth = TSC.TableauAuth(tableau_user, user_password, site_id=site_name)
     server = TSC.Server(tableau_server, use_server_version=True)
-    server.auth.sign_in(tableau_auth)
 
     under_review = []
     for a in args:
