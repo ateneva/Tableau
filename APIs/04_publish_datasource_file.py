@@ -2,6 +2,7 @@
 import tableauserverclient as TSC
 from pathlib import Path
 
+
 def publish_multiple_datasources(tableau_server, tableau_user, user_password, site_name, project_name, local_folder):
     # if you're connecting to the default site, pass empty string in site_name
 
@@ -14,7 +15,8 @@ def publish_multiple_datasources(tableau_server, tableau_user, user_password, si
     with server.auth.sign_in(tableau_auth):
         all_sites, pagination_item = server.sites.get()
         for site in all_sites:
-            if site_name == site.name:
+            print(site.name)
+            if site_name == site.name or site_name == '':
                 all_projects, pagination_item = server.projects.get()
                 print(site.id, site.name, site.content_url, site.state)
 
