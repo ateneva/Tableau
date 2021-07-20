@@ -11,7 +11,6 @@ from tableauhyperapi import HyperProcess, Telemetry, \
     HyperException
 
 import tableauserverclient as TSC
-from repos.python_handy.TableauAPIs import credentials as cr
 
 key_path = "C:/Users/angelinat/Documents/GCP/service_account.json"
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
@@ -55,7 +54,7 @@ def download_bucket_files(download_bucket_name, download_folder, download_file, 
     # Retrieve all blobs with a prefix matching the folder
     bucket = client.get_bucket(download_bucket_name)
     print(bucket)
-    blobs = list(bucket.list_blobs(prefix=download_file, delimiter='/')))
+    blobs = list(bucket.list_blobs(prefix=download_file, delimiter='/'))
     for blob in blobs:
         if blob.name.endswith(file_format):    # download only relevant file types
             destination_uri = f'{download_folder}/{blob.name}'
@@ -79,7 +78,7 @@ def union_data(file_name, file_path, save_path, file_format):
 
     # create new unioned file
     print('Creating new unioned file...')
-    with open(full_path,  'a', newline='\n', encoding='utf8') as singleFile:
+    with open(path_to_csv,  'a', newline='\n', encoding='utf8') as singleFile:
         # new line in python 3 fixes unix/windows line encodings
 
         for csv in glob(file_path + f'{file_name}_*.csv'):
@@ -100,7 +99,7 @@ def union_data(file_name, file_path, save_path, file_format):
 
             print(f'{csv} loaded successfully')
             os.remove(csv)
-    print(f'{full_path} created')
+    print(f'{path_to_csv} created')
 
 #######################################################################################################
                             # create hyper file structure
@@ -215,7 +214,7 @@ def publish_to_server(tableau_server_link, tableau_user, user_password, project_
         datasource = TSC.DatasourceItem(project_id)
         print(f"Publishing {hyper_file} to {project_name}...")
 
-        datasource = server.datasources.publish(datasource, path_to_database, publish_mode)
+        datasource = server.datasources.publish(datasource, path_to_hyper_file, publish_mode)
         print(f"Publishing of datasource '{hyper_file}' complete. Datasource ID: {datasource.id}")
 
 
