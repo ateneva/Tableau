@@ -1,5 +1,5 @@
-
 import tableauserverclient as TSC
+
 
 def refresh_published_datasources(tableau_server, tableau_user, user_password, site_name, *args):
     # if you're connecting to the default site, pass empty string in site_name
@@ -23,7 +23,7 @@ def refresh_published_datasources(tableau_server, tableau_user, user_password, s
             print(f'Datasources {pagination_item.total_available} found on site')
 
             for dataset in published:
-                server.datasources.populate_connections(dataset)    # get the connection information
+                server.datasources.populate_connections(dataset)  # get the connection information
                 connection = dataset.connections[0]
 
                 dataset_id = dataset.id
@@ -42,8 +42,8 @@ def refresh_published_datasources(tableau_server, tableau_user, user_password, s
                     connection_id, '|',
                     connection_username, '|',
                     connection_address
-                      )
+                )
 
-                if dataset_type != 'hyper':                        # hyper files can't be refreshed
-                    server.datasources.refresh(dataset)            # only possible to trigger full refresh
+                if dataset_type != 'hyper':  # hyper files can't be refreshed
+                    server.datasources.refresh(dataset)  # only possible to trigger full refresh
                     print(dataset_name, 'was triggered for refresh')

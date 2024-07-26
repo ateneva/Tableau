@@ -15,12 +15,13 @@ from tableauhyperapi import HyperProcess, Telemetry, \
 
 import tableauserverclient as TSC
 
+
 # key below is used for local testing purposes
-#key_path = '/Users/angelina_teneva/Documents/repos/python_handy/angelinat_service_account.json'
-#os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
+# key_path = '/Users/angelina_teneva/Documents/repos/python_handy/angelinat_service_account.json'
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
 
 #########################################################################################################
-                            # export data to storage bucket
+# export data to storage bucket
 #########################################################################################################
 
 def export_to_bucket(project, dataset_id, table_id, export_bucket, file_format):
@@ -36,7 +37,7 @@ def export_to_bucket(project, dataset_id, table_id, export_bucket, file_format):
     extract_job = client.extract_table(
         table_ref,
         destination_uri,
-        location="EU",    # Location must match that of the source table.
+        location="EU",  # Location must match that of the source table.
     )
     extract_job.result()  # Waits for job to complete.
 
@@ -44,8 +45,9 @@ def export_to_bucket(project, dataset_id, table_id, export_bucket, file_format):
         f"Exported {project}:{dataset_id}.{table_id} to {destination_uri}"
     )
 
+
 #######################################################################################################
-                            # create hyper file structure
+# create hyper file structure
 #######################################################################################################
 
 # map sql types so that values from hyper schema are recognized as hyper objects
@@ -67,24 +69,28 @@ def get_sql_types():
         'SqlType.bytes()': SqlType.bytes()
     }
     return sql_mapping
+
+
 sql_type = get_sql_types()
 
 # define the table
 hyper_table = TableDefinition(
     table_name=TableName("Extract", "Extract")
-        )
-        # the single table must be called "Extract" and published in "Extract" schema
-        # for TSC to be able to publish on Server
+)
+
+
+# the single table must be called "Extract" and published in "Extract" schema
+# for TSC to be able to publish on Server
 
 def define_hyper_schema(hyper_bucket_name, hyper_schema):
     print('Defining hyper file structure...')
     client = storage.Client()
-    hyper_schema_folder = dirname(os.path.abspath(__file__)) + '/'          # retrieve current directory
-    hyper_schema_name = hyper_schema.split('/')[2]                          # retrieve pure name of hyper schema
+    hyper_schema_folder = dirname(os.path.abspath(__file__)) + '/'  # retrieve current directory
+    hyper_schema_name = hyper_schema.split('/')[2]  # retrieve pure name of hyper schema
     hyper_schema_full_path = f'{hyper_schema_folder}{hyper_schema_name}'
 
     # retrieve parent directory
-        # dirname(dirname(os.path.abspath(__file__))) + '/'
+    # dirname(dirname(os.path.abspath(__file__))) + '/'
 
     # download hyper schema from GCP storage
     bucket = client.get_bucket(hyper_bucket_name)
@@ -104,8 +110,10 @@ def define_hyper_schema(hyper_bucket_name, hyper_schema):
             hyper_table.add_column(column)
 
     print('Hyper structure defined!')
+
+
 #######################################################################################################
-                            # add content to hyper file
+# add content to hyper file
 #######################################################################################################
 
 def create_hyper_file_from_csv(file_name, download_bucket_name, hyper_file_name):
@@ -119,8 +127,8 @@ def create_hyper_file_from_csv(file_name, download_bucket_name, hyper_file_name)
 
     # (https://help.tableau.com/current/api/hyper_api/en-us/reference/sql/processsettings.html).
     process_parameters = {
-        "log_file_max_count": "2",         # Limits the number of Hyper event log files to two
-        "log_file_size_limit": "100M"      # Limits the size of Hyper event log files to 100 megabyte
+        "log_file_max_count": "2",  # Limits the number of Hyper event log files to two
+        "log_file_size_limit": "100M"  # Limits the size of Hyper event log files to 100 megabyte
     }
 
     # (https://help.tableau.com/current/api/hyper_api/en-us/reference/sql/connectionsettings.html).
@@ -129,7 +137,7 @@ def create_hyper_file_from_csv(file_name, download_bucket_name, hyper_file_name)
 
         with Connection(endpoint=hyper.endpoint,
                         database=path_to_hyper_file,
-                        create_mode=CreateMode.CREATE_AND_REPLACE,      # re-create the hyper file schema.
+                        create_mode=CreateMode.CREATE_AND_REPLACE,  # re-create the hyper file schema.
                         parameters=connection_parameters) as connection:
 
             # create 'Extract' schema in hyper
@@ -154,25 +162,26 @@ def create_hyper_file_from_csv(file_name, download_bucket_name, hyper_file_name)
                     blob.download_to_filename(csv)
                     print(f'{csv_name} downloaded successfully')
 
-                    count_in_hyper_table = connection.execute_command(     # add to hyper file
+                    count_in_hyper_table = connection.execute_command(  # add to hyper file
                         command=f"COPY {hyper_table.table_name} "
                                 f"from {escape_string_literal(csv_name)} "
                                 f"with "
                                 f"(format csv, NULL '', delimiter ',', header)"
-                            )
+                    )
 
                     total_rows += count_in_hyper_table
                     print(f"Rows in file {csv_name} is {count_in_hyper_table}.")
                     print(f'{csv_name} successfully processed')
                     print(f"The number of rows in table {hyper_table.table_name} is {total_rows}.")
 
-                    os.remove(csv)                                         # delete local file
-                    blob.delete()                                          # delete file from storage bucket
+                    os.remove(csv)  # delete local file
+                    blob.delete()  # delete file from storage bucket
         print("The connection to the Hyper file has been closed.")
     print("The Hyper process has been shut down.")
 
+
 #######################################################################################################
-                            # publish hyper file to Tableau Server
+# publish hyper file to Tableau Server
 #######################################################################################################
 
 # TSC API version must be tableauserverclient==0.11.0 for huge hyper extracts to work
@@ -201,27 +210,32 @@ def publish_to_server(tableau_server_link, tableau_user, user_password, project_
         datasource = server.datasources.publish(datasource, path_to_hyper_file, publish_mode)
         print(f"Publishing of datasource '{hyper_extract}' complete. Datasource ID: {datasource.id}")
 
+
 if __name__ == '__main__':
     export = json.loads(sys.argv[1])
-    export_to_bucket(export['project'], export['dataset_id'], export['table_id'], export['export_bucket'], export['file_format'])
-    #export_args = (project, dataset_id, table_id, export_bucket, file_format)
-    #export_to_bucket('BQ project', 'BQ dataset', 'BQ table', 'GCS storage bucket', 'csv')
+    export_to_bucket(export['project'], export['dataset_id'], export['table_id'], export['export_bucket'],
+                     export['file_format'])
+    # export_args = (project, dataset_id, table_id, export_bucket, file_format)
+    # export_to_bucket('BQ project', 'BQ dataset', 'BQ table', 'GCS storage bucket', 'csv')
 
     hyper_schema_details = json.loads(sys.argv[1])
     define_hyper_schema(hyper_schema_details['hyper_bucket_name'], hyper_schema_details['hyper_schema'])
-    #schema_args = hyper_bucket_name, hyper_schema
-    #define_hyper_schema('GCS storage bucket', 'hyper/daily_update/data.json')
+    # schema_args = hyper_bucket_name, hyper_schema
+    # define_hyper_schema('GCS storage bucket', 'hyper/daily_update/data.json')
 
     hyper_file_payload = json.loads(sys.argv[1])
-    #hyper_file_payload_args = file_name, download_bucket_name
+    # hyper_file_payload_args = file_name, download_bucket_name
 
     try:
-        create_hyper_file_from_csv(hyper_file_payload['file_name'], hyper_file_payload['download_bucket_name'], hyper_file_payload['hyper_file_name'])
+        create_hyper_file_from_csv(hyper_file_payload['file_name'], hyper_file_payload['download_bucket_name'],
+                                   hyper_file_payload['hyper_file_name'])
     except HyperException as ex:
         print(ex)
         exit(1)
 
     publish_details = json.loads(sys.argv[1])
-    publish_to_server(publish_details['tableau_server_link'], publish_details['tableau_user'], publish_details['user_password'], publish_details['project_name'], publish_details['hyper_extract'])
+    publish_to_server(publish_details['tableau_server_link'], publish_details['tableau_user'],
+                      publish_details['user_password'], publish_details['project_name'],
+                      publish_details['hyper_extract'])
 
-    #publish_details_args = tableau_server_link, tableau_user, user_password, project_name, hyper_extract
+    # publish_details_args = tableau_server_link, tableau_user, user_password, project_name, hyper_extract

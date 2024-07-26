@@ -15,8 +15,9 @@ import tableauserverclient as TSC
 key_path = "C:/Users/angelinat/Documents/GCP/service_account.json"
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
 
+
 #########################################################################################################
-                            # export data to storage bucket
+# export data to storage bucket
 #########################################################################################################
 
 def export_to_bucket(project, dataset_id, table_id, export_bucket, file_format):
@@ -32,7 +33,7 @@ def export_to_bucket(project, dataset_id, table_id, export_bucket, file_format):
     extract_job = client.extract_table(
         table_ref,
         destination_uri,
-        location="EU",    # Location must match that of the source table.
+        location="EU",  # Location must match that of the source table.
     )
     extract_job.result()  # Waits for job to complete.
 
@@ -40,8 +41,9 @@ def export_to_bucket(project, dataset_id, table_id, export_bucket, file_format):
         f"Exported {project}:{dataset_id}.{table_id} to {destination_uri}"
     )
 
+
 #######################################################################################################
-                            # downlaod data from google storage bucket
+# downlaod data from google storage bucket
 #######################################################################################################
 
 def download_bucket_files(download_bucket_name, download_folder, download_file, file_format):
@@ -56,13 +58,14 @@ def download_bucket_files(download_bucket_name, download_folder, download_file, 
     print(bucket)
     blobs = list(bucket.list_blobs(prefix=download_file, delimiter='/'))
     for blob in blobs:
-        if blob.name.endswith(file_format):    # download only relevant file types
+        if blob.name.endswith(file_format):  # download only relevant file types
             destination_uri = f'{download_folder}/{blob.name}'
             blob.download_to_filename(destination_uri)
             print(f'{blob.name} downloaded successfully')
 
+
 #######################################################################################################
-                            # union downloaded csv
+# union downloaded csv
 #######################################################################################################
 
 def union_data(file_name, file_path, save_path, file_format):
@@ -70,7 +73,7 @@ def union_data(file_name, file_path, save_path, file_format):
     merged_file = f"{file_name}.{file_format}"
     path_to_csv = save_path + merged_file
 
-    if os.path.isfile(path_to_csv):   # delete previously created file if it exists
+    if os.path.isfile(path_to_csv):  # delete previously created file if it exists
         os.remove(path_to_csv)
         print('Removed old file')
     else:
@@ -78,22 +81,22 @@ def union_data(file_name, file_path, save_path, file_format):
 
     # create new unioned file
     print('Creating new unioned file...')
-    with open(path_to_csv,  'a', newline='\n', encoding='utf8') as singleFile:
+    with open(path_to_csv, 'a', newline='\n', encoding='utf8') as singleFile:
         # new line in python 3 fixes unix/windows line encodings
 
         for csv in glob(file_path + f'{file_name}_*.csv'):
-            csv_name = csv[csv.find('\\')+1:]
+            csv_name = csv[csv.find('\\') + 1:]
 
             if csv_name == merged_file:
                 pass
 
-            elif csv_name == initial_file:             # write the header + content of first file
+            elif csv_name == initial_file:  # write the header + content of first file
                 for line in open(csv, 'r'):
                     singleFile.write(line)
 
             else:
-                with open(csv, 'r') as file:           # skip header for subsequent files
-                    next(file)                         # lines = f.readlines()[1:] # alternative approach
+                with open(csv, 'r') as file:  # skip header for subsequent files
+                    next(file)  # lines = f.readlines()[1:] # alternative approach
                     for line in file:
                         singleFile.write(line)
 
@@ -101,8 +104,9 @@ def union_data(file_name, file_path, save_path, file_format):
             os.remove(csv)
     print(f'{path_to_csv} created')
 
+
 #######################################################################################################
-                            # create hyper file structure
+# create hyper file structure
 #######################################################################################################
 
 # map sql types for hyper schema
@@ -124,13 +128,15 @@ def get_sql_types():
         'SqlType.bytes()': SqlType.bytes()
     }
     return sql_mapping
-sql_type = get_sql_types()
 
+
+sql_type = get_sql_types()
 
 # define the table
 hyper_table = TableDefinition(
     table_name=TableName("Extract", "Extract")
-    ) # the single table must be called "Extract" and published in "Extract" schema for TSC to be able to publish on Server
+)  # the single table must be called "Extract" and published in "Extract" schema for TSC to be able to publish on Server
+
 
 # add the column names and column types
 def define_hyper_schema(path_to_json):
@@ -145,8 +151,9 @@ def define_hyper_schema(path_to_json):
             column = TableDefinition.Column(field_name, field_type, NULLABLE)
             hyper_table.add_column(column)
 
+
 #######################################################################################################
-                            # add content to hyper file
+# add content to hyper file
 #######################################################################################################
 
 def create_hyper_file_from_csv(full_path_to_csv, file_name):
@@ -154,12 +161,12 @@ def create_hyper_file_from_csv(full_path_to_csv, file_name):
 
     # create a hyper file variables
     hyper_file = f"{file_name}.hyper"
-    path_to_database = Path(hyper_file) # path where hyper file will be created
+    path_to_database = Path(hyper_file)  # path where hyper file will be created
 
     # (https://help.tableau.com/current/api/hyper_api/en-us/reference/sql/processsettings.html).
     process_parameters = {
-        "log_file_max_count": "2",      # Limits the number of Hyper event log files to two
-        "log_file_size_limit": "100M"   # Limits the size of Hyper event log files to 100 megabyte
+        "log_file_max_count": "2",  # Limits the number of Hyper event log files to two
+        "log_file_size_limit": "100M"  # Limits the size of Hyper event log files to 100 megabyte
     }
 
     # (https://help.tableau.com/current/api/hyper_api/en-us/reference/sql/connectionsettings.html).
@@ -168,9 +175,8 @@ def create_hyper_file_from_csv(full_path_to_csv, file_name):
 
         with Connection(endpoint=hyper.endpoint,
                         database=path_to_database,
-                        create_mode=CreateMode.CREATE_AND_REPLACE,      # re-create the hyper file schema.
+                        create_mode=CreateMode.CREATE_AND_REPLACE,  # re-create the hyper file schema.
                         parameters=connection_parameters) as connection:
-
             # create 'Extract' schema
             connection.catalog.create_schema(schema=hyper_table.table_name.schema_name)
             connection.catalog.create_table(table_definition=hyper_table)
@@ -181,14 +187,15 @@ def create_hyper_file_from_csv(full_path_to_csv, file_name):
                         f"from {escape_string_literal(full_path_to_csv)} "
                         f"with "
                         f"(format csv, NULL '', delimiter ',', header)"
-                    )
+            )
 
             print(f"The number of rows in table {hyper_table.table_name} is {count_in_hyper_table}.")
         print("The connection to the Hyper file has been closed.")
     print("The Hyper process has been shut down.")
 
+
 #######################################################################################################
-                            # publish hyper file to Tableau Server
+# publish hyper file to Tableau Server
 #######################################################################################################
 
 # TSC API version must be tableauserverclient==0.11.0 for huge hyper extracts to work

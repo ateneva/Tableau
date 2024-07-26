@@ -1,7 +1,7 @@
-
 import tableauserverclient as TSC
 import datetime as dt
 from PyPDF2 import PdfFileMerger, PdfFileReader
+
 
 def download_as_pdf(tableau_server, tableau_user, user_password, site_name, download_path, *args):
     # if you're connecting to the default site, pass empty string in site_name
@@ -38,17 +38,17 @@ def download_as_pdf(tableau_server, tableau_user, user_password, site_name, down
 
                 if len(connection_info) > 0:
                     print(
-                            wbk.id,
-                            wbk.name, '_',
-                            wbk.connections[0].connection_type,'_',
-                            wbk.connections[0].id, '_',
-                            wbk.connections[0].username, '_',
-                            wbk.connections[0].server_address
-                              )
+                        wbk.id,
+                        wbk.name, '_',
+                        wbk.connections[0].connection_type, '_',
+                        wbk.connections[0].id, '_',
+                        wbk.connections[0].username, '_',
+                        wbk.connections[0].server_address
+                    )
 
                 # specify PDF landsscape
                 pdf_req_option = TSC.PDFRequestOptions(page_type=TSC.PDFRequestOptions.PageType.A4,
-                                                           orientation=TSC.PDFRequestOptions.Orientation.Landscape)
+                                                       orientation=TSC.PDFRequestOptions.Orientation.Landscape)
 
                 # download wbk as separate page PDFs
                 pdf_files = []
